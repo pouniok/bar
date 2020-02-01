@@ -76,3 +76,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #edeef6;
     border-color: #edeef6;
 }
+
+.fab {
+    bottom: 10px !important;
+    background-color: var(--danger) !important;
+}

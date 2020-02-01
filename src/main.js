@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import './assets/style.css'
 
 import * as VueGoogleMaps from "vue2-google-maps";
+import vuetify from './plugins/vuetify';
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -28,5 +29,6 @@ Vue.filter('pluralize', (word, amount) => (amount > 1 || amount == 0) ? `${word}
 
 new Vue({
   render: h => h(App),
-  router,
+  vuetify,
+  router
 }).$mount('#app')

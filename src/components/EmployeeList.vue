@@ -1,18 +1,20 @@
 <template>
-    <!-- Chats -->
     <nav class="nav d-block list-discussions-js mb-5">
-        <!-- Chat link -->
-        <a class="text-reset nav-link p-0 mb-4"
-           href="#" v-for="employee in employeesFiltered"
-           :key="employee.id"
-           :class="{ 'selected': isSelected(employee) }"
-           @click="$emit('employee-selected', employee)">
-            <EmployeeListItem  :employee="employee" />
-        </a>
-        <!-- Chat link -->
-
+        <template v-if="employees.length > 0">
+            <a class="text-reset nav-link p-0 mb-4"
+               href="#" v-for="employee in employeesFiltered"
+               :key="employee.id"
+               :class="{ 'selected': isSelected(employee) }"
+               @click="$emit('employee-selected', employee)">
+                <EmployeeListItem  :employee="employee" />
+            </a>
+        </template>
+        <v-skeleton-loader v-else
+               class="mx-auto"
+               width="100%"
+               type="list-item-avatar-two-line"
+        ></v-skeleton-loader>
     </nav>
-    <!-- Chats -->
 </template>
 
 <script>

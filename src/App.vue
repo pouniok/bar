@@ -28,16 +28,16 @@
 </template>
 
 <script>
-import EmployeeService from './services/employee-service'
+  import EmployeeService from './services/employee-service'
 
-export default {
-  name: 'app',
+  export default {
+    name: 'app',
     provide: () => {
-     return {
-       employeeService: new EmployeeService()
-     }
-   }
-}
+      return {
+        employeeService: new EmployeeService()
+      }
+    }
+  }
 </script>
 
 <style>

@@ -17,6 +17,15 @@ export default class EmployeeService {
   }
 
   /**
+   * Remove an employee
+   */
+  async removeEmployee(employee) {
+    const resp = await fetch(this.BASE_URL + `?action=employee-delete&id=${employee.id}`)
+    const data = await resp.json()
+    return data
+  }
+
+  /**
    * Remove a bar for an employee
    */
   async removeBarForEmployee(employeeId, barId) {
