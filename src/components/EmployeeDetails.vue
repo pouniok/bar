@@ -1,6 +1,6 @@
 <template>
     <div class="text-center d-flex flex-column h-100 position-relative">
-            <v-menu top left>
+            <v-menu top left :close-on-click="true" :close-on-content-click="true">
                 <template v-slot:activator="{ on }">
                     <v-btn light icon v-on="on" absolute top right>
                         <v-icon>mdi-dots-vertical</v-icon>

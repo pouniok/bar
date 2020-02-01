@@ -16,9 +16,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/employees">Employés</router-link>
           </li>
-          <li class="nav-item">
+          <!-- li class="nav-item">
             <router-link class="nav-link" to="/newsletters">Newsletters</router-link>
-          </li>
+          </li -->
         </ul>
       </div>
     </nav>

@@ -21,44 +21,30 @@
                 </template>
                 <v-card>
                     <v-card-title>
-                        <span class="headline">User Profile</span>
+                        <span class="headline">Nouvel employé</span>
                     </v-card-title>
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Legal first name*" required></v-text-field>
+                                <v-col cols="6">
+                                    <v-text-field label="Prénom*" required @keyup="firstname = $event.target.value" :value="this.firstname"></v-text-field>
                                 </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field
-                                            label="Legal last name*"
-                                            hint="example of persistent helper text"
-                                            persistent-hint
-                                            required
-                                    ></v-text-field>
+                                <v-col cols="6">
+                                    <v-text-field label="Nom*" required @keyup="lastname = $event.target.value" :value="this.lastname"></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-text-field label="Email*" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field label="Password*" type="password" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6">
-                                    <v-select
-                                            :items="['0-17', '18-29', '30-54', '54+']"
-                                            label="Age*"
-                                            required
-                                    ></v-select>
-                                </v-col>
-                                <v-col cols="12" sm="6">
-                                    <v-autocomplete
-                                            :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                                            label="Interests"
-                                            multiple
-                                    ></v-autocomplete>
+                                    <v-label>Date de naissance</v-label>
+                                    <v-date-picker
+                                            v-model="birthday"
+                                            full-width
+                                            :landscape="$vuetify.breakpoint.smAndUp"
+                                            locale="fr-fr"
+                                            first-day-of-week="1"
+                                            color="#dc3545"
+                                            :min="new Date(1950, 1, 1).toISOString().substr(0, 10)"
+                                            :max="new Date().toISOString().substr(0, 10)"
+                                            class="mt-4"
+                                    ></v-date-picker>
                                 </v-col>
                             </v-row>
                         </v-container>
@@ -66,8 +52,8 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                        <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                        <v-btn color="blue darken-1" text @click="closeAddEmployeeDialog">Annuler</v-btn>
+                        <v-btn color="blue darken-1" text @click="addEmployee" class="text-danger" :disabled="!isValid">Valider</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -95,7 +81,15 @@
               currentEmployee: {},
               searchText: "",
               employees: [],
-              dialog: null
+              dialog: null,
+              firstname: null,
+              lastname: null,
+              birthday: new Date(1990, 5, 15).toISOString().substr(0, 10)
+          }
+        },
+        computed: {
+          isValid() {
+              return this.firstname && this.lastname && this.birthday
           }
         },
         components: {
@@ -113,6 +107,25 @@
             },
             searchEmployee(searchText) {
                 this.searchText = searchText.toLowerCase()
+            },
+            closeAddEmployeeDialog() {
+                this.dialog = false
+                this.firstname = null
+                this.lastname = null
+            },
+            async addEmployee() {
+                const resp = await this.employeeService.addEmployee({
+                    firstname: this.firstname,
+                    lastname: this.lastname,
+                    birthday: new Date(this.birthday).getTime()
+                })
+
+                if (resp.success) {
+                    this.employees = await this.employeeService.getEmployees()
+                    this.currentEmployee = this.employees.find(e => e.firstname === this.firstname && e.lastname === this.lastname)
+                }
+
+                this.closeAddEmployeeDialog()
             },
 
             /**

@@ -17,6 +17,20 @@ export default class EmployeeService {
   }
 
   /**
+   * Add an employee
+   */
+  async addEmployee(employee) {
+    // Encodage des paramètres pour l'API
+    employee = Object.keys(employee).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(employee[k])
+    }).join('&')
+
+    const resp = await fetch(this.BASE_URL + `?action=employee-add&${employee}`)
+    const data = await resp.json()
+    return data
+  }
+
+  /**
    * Remove an employee
    */
   async removeEmployee(employee) {
