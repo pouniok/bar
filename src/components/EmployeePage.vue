@@ -15,7 +15,9 @@
         </div>
 
         <div class="main p-3">
-            <EmployeeDetails :employee="currentEmployee" />
+            <EmployeeDetails :employee="currentEmployee"
+                             @employee-bar-remove="removeBarForEmployee"
+                             @employee-bar-add="addBarForEmployee" />
         </div>
     </div>
 </template>
@@ -50,7 +52,32 @@
             },
             searchEmployee(searchText) {
                 this.searchText = searchText.toLowerCase()
-            }
+            },
+            /**
+             * @param event : Object { employee, bar }
+             */
+            async removeBarForEmployee(event) {
+                const resp = await this.employeeService.removeBarForEmployee(event.employee.id, event.bar.id)
+
+                if (resp.success) {
+                    const employee = this.employees.find(e => e.id === event.employee.id)
+
+                    if (employee && employee.bars) {
+                        employee.bars = employee.bars.filter(bar => bar.id !== event.bar.id)
+                    }
+                }
+            },
+            /**
+             * @param event : Object { employee, place }
+             */
+            async addBarForEmployee(event) {
+                const resp = await this.employeeService.addBarForEmployee(event.employee.id, event.place)
+
+                if (resp.success) {
+                    const employee = this.employees.find(e => e.id === event.employee.id)
+                    employee.bars = resp.result[0].bars
+                }
+            },
         }
     }
 </script>

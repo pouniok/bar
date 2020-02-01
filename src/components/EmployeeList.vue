@@ -20,10 +20,7 @@
 
   export default {
     name: 'EmployeeList',
-    inject: ['employeeService'],
-    components: {
-        EmployeeListItem
-    },
+    components: { EmployeeListItem  },
     props: ['employees', 'selected', 'searchText'],
     computed: {
         barCount() {

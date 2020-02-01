@@ -1,8 +1,8 @@
 <template>
     <div class="text-center d-flex flex-column h-100">
         <div>
-            <img  v-if="employee.icon" :src="employee.icon" class="rounded mx-auto d-block mb-3" alt="...">
-            <img  v-else src="../assets/beer.png" class="rounded mx-auto d-block mb-3" alt="...">
+            <img  v-if="employee.icon" :src="employee.icon" class="rounded mx-auto d-block mb-3" alt="Employee icon">
+            <img  v-else src="../assets/beer.png" class="rounded mx-auto d-block mb-3" alt="Employee icon">
 
             <h1>{{ employee.firstname }} {{ employee.lastname }}</h1>
             <p>
@@ -10,6 +10,12 @@
             </p>
         </div>
 
+        <template v-if="(employee.bars ||[]).length < 2">
+            <gmap-autocomplete @place_changed="setPlace"
+                               @input="searchPlace = $event.target.value"
+                               :value="searchPlace"
+                               class="form-control" />
+        </template>
         <div class="card-deck m-4">
             <div class="card" v-for="bar in employee.bars" :key="bar.id">
                 <MapCard :bar="bar" />
@@ -21,7 +27,7 @@
                     </p>
                 </div>
                 <div class="card-body text-right">
-                    <button class="btn btn-danger" @click="removeBar(employee, bar)">Supprimer</button>
+                    <button class="btn btn-danger" @click="$emit('employee-bar-remove', { employee, bar })">Supprimer</button>
                 </div>
             </div>
         </div>
@@ -35,10 +41,15 @@
         name: "EmployeeDetails",
         components: { MapCard },
         props: ['employee'],
+        data: () => {
+          return {
+              searchPlace: ''
+          }
+        },
         methods: {
-            removeBar(employee, bar) {
-                // TODO not implemented
-                console.log('removeBar', employee, bar)
+            setPlace(place) {
+                this.$emit('employee-bar-add', { employee: this.employee, place })
+                this.searchPlace = ''
             }
         }
     }
@@ -47,8 +58,7 @@
 <style scoped>
 img {
     max-width: 128px;
+    min-height: 128px;
     max-height: 128px;
 }
-
-
 </style>
