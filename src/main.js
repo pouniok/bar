@@ -8,6 +8,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import './assets/style.css'
 
+import * as VueGoogleMaps from "vue2-google-maps";
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyBaB_maY309YYrKlFDFkKzfleCuPKc_MsY",
+    libraries: "places"
+  }
+});
+
 
 Vue.prototype.moment = moment
 

@@ -29,7 +29,7 @@ export default {
   props: ['employee'],
   computed: {
       barCount() {
-          const barCount = [].concat(this.employee.bars).length;
+          const barCount = (this.employee.bars || []).length;
           const s = barCount > 1 ? 's' : '';
 
           return `${barCount} bar${s} proposé${s}`;
