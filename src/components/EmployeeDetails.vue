@@ -10,17 +10,37 @@
             </p>
         </div>
 
-        <Map :bars="employee.bars" />
+        <div class="card-deck m-4">
+            <div class="card" v-for="bar in employee.bars" :key="bar.id">
+                <MapCard :bar="bar" />
+                <div class="card-body text-left">
+                    <h5 class="card-title">{{ bar.name }}</h5>
+                    <p class="card-text">
+                        <i class="far fa-check-circle" style="color: #69B055" :hidden="!bar.validated"></i>
+                        {{ bar.validated ? 'Déjà Visité' : 'Jamais visité' }}
+                    </p>
+                </div>
+                <div class="card-body text-right">
+                    <button class="btn btn-danger" @click="removeBar(employee, bar)">Supprimer</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import Map from "./Map";
+    import MapCard from "./MapCard";
 
     export default {
         name: "EmployeeDetails",
-        components: { Map },
-        props: ['employee']
+        components: { MapCard },
+        props: ['employee'],
+        methods: {
+            removeBar(employee, bar) {
+                // TODO not implemented
+                console.log('removeBar', employee, bar)
+            }
+        }
     }
 </script>
 
