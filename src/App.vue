@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <nav class="navbar sticky-top navbar-light bg-light navbar-expand-sm">
+    <nav class="navbar sticky-top navbar-light navbar-expand">
       <router-link class="navbar-brand" to="/">
-        <img src="./assets/beer.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Bar
+        <img src="./assets/beer.png" width="30" height="30" class="d-inline-block align-top mr-3" alt="">
       </router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,8 +10,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <router-link class="nav-link" to="/">Accueil <span class="sr-only">(current)</span></router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Accueil</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/employees">Employés</router-link>
@@ -24,9 +23,7 @@
       </div>
     </nav>
 
-    <div class="container">
-      <router-view />
-    </div><!-- .container -->
+    <router-view />
   </div>
 </template>
 
@@ -44,7 +41,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
-}
+
 </style>
