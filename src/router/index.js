@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import EmployeePage from "../components/EmployeePage"
+import AfterworkPage from "../components/AfterworkPage";
 
 Vue.use(Router)
 
@@ -13,7 +14,7 @@ Vue.use(require('vue-moment'), {
 
 export default new Router({
   routes: [
-    { path: '/', redirect: '/employees' },
+    { path: '/', component: AfterworkPage },
     { path: '/employees', name: 'EmployeePage', component: EmployeePage }
   ]
 })

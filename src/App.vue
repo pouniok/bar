@@ -29,12 +29,14 @@
 
 <script>
   import EmployeeService from './services/employee-service'
+  import AfterworkService from "./services/afterwork-service";
 
   export default {
     name: 'app',
     provide: () => {
       return {
-        employeeService: new EmployeeService()
+        employeeService: new EmployeeService(),
+        afterworkService: new AfterworkService(),
       }
     }
   }

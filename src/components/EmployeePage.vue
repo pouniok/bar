@@ -48,12 +48,12 @@
                                 </v-col>
                             </v-row>
                         </v-container>
-                        <small>*indicates required field</small>
+                        <small>*champs obligatoires</small>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="closeAddEmployeeDialog">Annuler</v-btn>
-                        <v-btn color="blue darken-1" text @click="addEmployee" class="text-danger" :disabled="!isValid">Valider</v-btn>
+                        <v-btn text @click="closeAddEmployeeDialog">Annuler</v-btn>
+                        <v-btn text @click="addEmployee" class="text-danger" :disabled="!isValid">Valider</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>

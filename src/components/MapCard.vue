@@ -5,9 +5,9 @@
                 :zoom="17"
                 :options="{
                    mapTypeControl: false,
-                   disableDefaultUI: true
+                   disableDefaultUI: true,
                  }"
-                style="width:100%; height: 300px;">
+                style="width:100%; height: 300px">
             <gmap-marker
                     :position="position"
                     @click="markerClick(m)"
