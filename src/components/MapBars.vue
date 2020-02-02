@@ -91,6 +91,8 @@
         watch: {
             bars(bars) {
                 if (bars.length > 2) {
+                    while (!this.google);
+
                     const bounds = new this.google.maps.LatLngBounds()
                     for (let bar of bars) {
                         bounds.extend(this.getPosition(bar))
@@ -147,7 +149,7 @@
                             map.setCenter(marker.$markerObject.getPosition());
                         })
 
-                        this.$emit('bar-selected', bar)
+                        this.$emit('bar-selected', { bar, date: this.nextbar } )
                     }
                 }
 

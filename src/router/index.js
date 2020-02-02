@@ -15,6 +15,6 @@ Vue.use(require('vue-moment'), {
 export default new Router({
   routes: [
     { path: '/', component: AfterworkPage },
-    { path: '/employees', name: 'EmployeePage', component: EmployeePage }
+    { path: '/employees', component: EmployeePage }
   ]
 })

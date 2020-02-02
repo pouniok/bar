@@ -12,7 +12,7 @@
 
         <div class="main pt-3 pl-3">
             <div class="d-flex flex-column h-100 position-relative">
-                <AfterworkDetails :afterwork="currentAfterwork" />
+                <AfterworkDetails :afterwork="currentAfterwork" @afterwork-remove="removeAfterwork" />
                 <MapBars :bars="bars" :afterwork="currentAfterwork" @bar-selected="barSelected" />
             </div>
         </div>
@@ -36,17 +36,27 @@
             }
         },
         async created() {
-            this.afterworks = await this.afterworkService.getAfterworks()
-            this.currentAfterwork = this.afterworks[0]
-
-            this.bars = await this.afterworkService.getBars()
+            this.loadAfterworks()
+            this.loadBars()
         },
         methods: {
+            async loadAfterworks() {
+                this.afterworks = await this.afterworkService.getAfterworks()
+                this.currentAfterwork = this.afterworks[0]
+            },
+            async loadBars() {
+                this.bars = await this.afterworkService.getBars()
+            },
             selectAfterwork(afterwork) {
                 this.currentAfterwork = this.afterworks.find(aw => aw.id === afterwork.id)
             },
-            barSelected(bar) {
-                console.log('bar', bar)
+            async removeAfterwork(afterwork) {
+                await this.afterworkService.removeAfterwork(afterwork)
+                this.loadAfterworks()
+            },
+            async barSelected(opts) {
+                await this.afterworkService.addAfterwork(opts.bar, opts.date)
+                this.loadAfterworks()
             }
         },
     }
