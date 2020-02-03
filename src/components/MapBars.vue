@@ -111,9 +111,20 @@
             toggleInfoWindow(bar, idx) {
                 this.infoWindowPos = this.getPosition(bar)
                 this.infoOptions.content = `
-                    <h4>${bar.name}</h4>
-                    ${ bar.validated ? '<i class="far fa-check-circle" style="color: #69B055"></i> Déjà Visité' :
-                    (bar.cdm ? '<i class="fas fa-radiation" style="color: #F46660"></i> FUYEZ §§' :'Jamais visité') }
+                    <div class="text-center">
+                        <h4>${bar.name}</h4>
+                        <p>${ bar.validated ? '<i class="far fa-check-circle" style="color: #69B055"></i> Déjà Visité' :
+                        (bar.cdm ? '<i class="fas fa-radiation" style="color: #F46660"></i> FUYEZ §§' : 'Jamais visité') }</p>
+                        ${ bar.employees.map(e =>
+                            '<div class="people">' +
+                            (e.icon ? '<img src="'+e.icon+'" class="avatar" />' : '<span class="fa-stack fa-2x">' +
+                                '  <i class="fas fa-circle fa-stack-2x"></i>' +
+                                '  <i class="fas fa-user fa-stack-1x fa-inverse"></i>' +
+                                '</span>') +
+                            '<br/><b>'+e.firstname+'</b><br/>'+e.lastname +
+                            '</div>'
+                        ).join('') }
+                    </div>
                 `
 
                 //check if its the same marker that was selected if yes toggle
@@ -186,3 +197,17 @@
         }
     };
 </script>
+
+<style>
+    .people {
+        display: inline-block;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .people .avatar {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+</style>
