@@ -10,6 +10,10 @@ body {
     letter-spacing: 0.3px;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: #242939;
     font-weight: 500;

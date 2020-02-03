@@ -16,9 +16,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/employees">Employés</router-link>
           </li>
-          <!-- li class="nav-item">
+          <li class="nav-item">
             <router-link class="nav-link" to="/newsletters">Newsletters</router-link>
-          </li -->
+          </li>
         </ul>
       </div>
     </nav>
@@ -30,6 +30,7 @@
 <script>
   import EmployeeService from './services/employee-service'
   import AfterworkService from "./services/afterwork-service";
+  import NewsletterService from "./services/newsletter-service";
 
   export default {
     name: 'app',
@@ -37,6 +38,7 @@
       return {
         employeeService: new EmployeeService(),
         afterworkService: new AfterworkService(),
+        newsletterService: new NewsletterService(),
       }
     }
   }
