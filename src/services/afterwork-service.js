@@ -4,7 +4,7 @@
  */
 export default class AfterworkService {
   constructor() {
-    this.BASE_URL = 'http://api.godhateusall.com/'
+    this.BASE_URL = 'https://api.godhateusall.com/'
   }
 
   /**

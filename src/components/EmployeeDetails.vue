@@ -94,7 +94,7 @@
               searchPlace: '',
               dialog: null,
               dropzoneOptions: {
-                  url: 'http://api.godhateusall.com/?action=employee-picture',
+                  url: 'https://api.godhateusall.com/?action=employee-picture',
                   thumbnailWidth: 128,
                   previewTemplate : '<div style="display:none"></div>',
                   headers: { "Cache-Control": "", "X-Requested-With": "" }

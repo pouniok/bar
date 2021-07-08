@@ -4,7 +4,7 @@
  */
 export default class NewsletterService {
   constructor() {
-    this.BASE_URL = 'http://api.godhateusall.com/newsletters.php'
+    this.BASE_URL = 'https://api.godhateusall.com/newsletters.php'
   }
 
   /**
