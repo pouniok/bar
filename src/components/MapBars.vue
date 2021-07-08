@@ -142,7 +142,11 @@
                 let i = 0
 
                 const markers = this.$refs.markers
-                const bars = this.bars.filter(bar => !bar.validated)
+
+                // On vérifie pour chaque bar s'il est proposé plusieurs fois pour le rajouter à la liste
+                const bars = this.bars.filter(bar => !bar.validated).reduce((res, bar) => {
+                  return res.concat(Array(bar.employee.length).fill(bar));
+                }, [])
 
                 function showRandomBar() {
                     const bar = bars[Math.floor(Math.random()*bars.length)];
